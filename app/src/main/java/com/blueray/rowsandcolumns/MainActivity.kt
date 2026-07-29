@@ -24,7 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             RowsAndColumnsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HotelBookingScreen()
+                    HotelBookingScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }

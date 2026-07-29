@@ -1,6 +1,5 @@
 package com.blueray.rowsandcolumns.basic_layout
 
-import android.widget.Button
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -44,8 +43,6 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.graphics.component1
-import androidx.core.graphics.component2
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.blueray.rowsandcolumns.R
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
