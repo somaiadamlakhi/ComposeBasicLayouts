@@ -11,10 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.blueray.rowsandcolumns.basic_layout.HotelBookingScreen
-import com.blueray.rowsandcolumns.basic_layout.LazyList
-import com.blueray.rowsandcolumns.basic_layout.LazyRowDemo
-import com.blueray.rowsandcolumns.basic_layout.ScaffoldDemo
+import com.blueray.rowsandcolumns.number_guess.NumberGuessingScreenRoot
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,8 +21,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             RowsAndColumnsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HotelBookingScreen(
-                        modifier = Modifier.padding(innerPadding)
+                    NumberGuessingScreenRoot(
+                        modifier = Modifier.padding(
+                            innerPadding
+                        )
                     )
                 }
             }
