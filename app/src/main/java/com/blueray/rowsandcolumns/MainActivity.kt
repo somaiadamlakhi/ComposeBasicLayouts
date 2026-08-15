@@ -29,3 +29,43 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+//override fun onCreate(savedInstanceState: Bundle?) {
+//    super.onCreate(savedInstanceState)
+//    enableEdgeToEdge()
+//    setContent {
+//        RowsAndColumnsTheme() {
+//            Scaffold(
+//                modifier = Modifier.fillMaxSize(),
+//            ) { innerPadding ->
+//                var page by remember {
+//                    mutableIntStateOf(0)
+//                }
+//                Column(
+//                    modifier = Modifier
+//                        .padding(innerPadding)
+//                ) {
+//                    SubcomposePagedRow(
+//                        page = page,
+//                        modifier = Modifier
+//                            .background(Color.Red)
+//                    ) {
+//                        (1..1000).forEach {
+//                            Box(
+//                                modifier = Modifier
+//                                    .height(100.dp)
+//                                    .width(Random.nextInt(300).dp)
+//                                    .background(Color(Random.nextInt()))
+//                            )
+//                        }
+//                    }
+//                    Button(onClick = {
+//                        page++
+//                    }) {
+//                        Text("Go to next page")
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//
