@@ -7,8 +7,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.blueray.rowsandcolumns.todo_list.ToDoListScreenRoot
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntOffset
+import com.blueray.rowsandcolumns.measurements.custom_layout.LazyMindMap
+import com.blueray.rowsandcolumns.measurements.custom_layout.MindMapItem
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,18 +23,62 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RowsAndColumnsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ToDoListScreenRoot(
-                        modifier = Modifier.padding(
-                            innerPadding
+            RowsAndColumnsTheme() {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                ) { innerPadding ->
+                    val mindMapItems = remember {
+                        listOf(
+                            MindMapItem(
+                                title = "Hello world 1",
+                                percentageOffset = Offset(
+                                    x = 0f,
+                                    y = 0f
+                                )
+                            ),
+                            MindMapItem(
+                                title = "Hello world 2",
+                                percentageOffset = Offset(
+                                    x = 1f,
+                                    y = 0f
+                                )
+                            ),
+                            MindMapItem(
+                                title = "Hello world 3",
+                                percentageOffset = Offset(
+                                    x = 0.3f,
+                                    y = -0.5f
+                                )
+                            ),
+                            MindMapItem(
+                                title = "Hello world 4",
+                                percentageOffset = Offset(
+                                    x = -0.2f,
+                                    y = 1.5f
+                                )
+                            ),
                         )
+                    }
+
+                    var mindMapOffset by remember {
+                        mutableStateOf(IntOffset.Zero)
+                    }
+                    LazyMindMap(
+                        items = mindMapItems,
+                        mindMapOffset = mindMapOffset,
+                        onDrag = { delta ->
+                            mindMapOffset += delta
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
                     )
                 }
             }
         }
     }
 }
+
 
 //override fun onCreate(savedInstanceState: Bundle?) {
 //    super.onCreate(savedInstanceState)
@@ -69,3 +120,6 @@ class MainActivity : ComponentActivity() {
 //    }
 //}
 //
+
+
+
