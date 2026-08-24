@@ -7,7 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,6 +22,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntOffset
 import com.blueray.rowsandcolumns.measurements.custom_layout.LazyMindMap
 import com.blueray.rowsandcolumns.measurements.custom_layout.MindMapItem
+import com.blueray.rowsandcolumns.side_effect.DisposableEffectDemo
 import com.blueray.rowsandcolumns.side_effect.LaunchedEffectDemo
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 
@@ -32,12 +37,39 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
 
-                    LaunchedEffectDemo(modifier = Modifier.padding(innerPadding))
+                    var toggle by remember {
+                        mutableStateOf(false)
+                    }
+                    if (!toggle)
+                        DisposableEffectDemo(modifier = Modifier.padding(innerPadding))
+
+                    Button(
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .fillMaxSize()
+                            .wrapContentSize(),
+                        onClick = { toggle = !toggle }
+                    ) { Text("Toggle") }
                 }
             }
         }
     }
 }
+
+//override fun onCreate(savedInstanceState: Bundle?) {
+//    super.onCreate(savedInstanceState)
+//    enableEdgeToEdge()
+//    setContent {
+//        RowsAndColumnsTheme {
+//            Scaffold(
+//                modifier = Modifier.fillMaxSize(),
+//            ) { innerPadding ->
+//
+//                LaunchedEffectDemo(modifier = Modifier.padding(innerPadding))
+//            }
+//        }
+//    }
+//}
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
