@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.IntOffset
 import com.blueray.rowsandcolumns.measurements.custom_layout.LazyMindMap
 import com.blueray.rowsandcolumns.measurements.custom_layout.MindMapItem
 import com.blueray.rowsandcolumns.side_effect.DisposableEffectDemo
+import com.blueray.rowsandcolumns.side_effect.LaunchAnimation
 import com.blueray.rowsandcolumns.side_effect.LaunchedEffectDemo
+import com.blueray.rowsandcolumns.side_effect.RememberUpdatedStateDemo
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,24 +39,41 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) { innerPadding ->
 
-                    var toggle by remember {
-                        mutableStateOf(false)
-                    }
-                    if (!toggle)
-                        DisposableEffectDemo(modifier = Modifier.padding(innerPadding))
-
-                    Button(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxSize()
-                            .wrapContentSize(),
-                        onClick = { toggle = !toggle }
-                    ) { Text("Toggle") }
+                    RememberUpdatedStateDemo(
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
     }
 }
+
+//override fun onCreate(savedInstanceState: Bundle?) {
+//    super.onCreate(savedInstanceState)
+//    enableEdgeToEdge()
+//    setContent {
+//        RowsAndColumnsTheme {
+//            Scaffold(
+//                modifier = Modifier.fillMaxSize(),
+//            ) { innerPadding ->
+//
+//                var toggle by remember {
+//                    mutableStateOf(false)
+//                }
+//                if (!toggle)
+//                    DisposableEffectDemo(modifier = Modifier.padding(innerPadding))
+//
+//                Button(
+//                    modifier = Modifier
+//                        .padding(innerPadding)
+//                        .fillMaxSize()
+//                        .wrapContentSize(),
+//                    onClick = { toggle = !toggle }
+//                ) { Text("Toggle") }
+//            }
+//        }
+//    }
+//}
 
 //override fun onCreate(savedInstanceState: Bundle?) {
 //    super.onCreate(savedInstanceState)
