@@ -24,6 +24,7 @@ import com.blueray.rowsandcolumns.measurements.custom_layout.LazyMindMap
 import com.blueray.rowsandcolumns.measurements.custom_layout.MindMapItem
 import com.blueray.rowsandcolumns.side_effect.DisposableEffectDemo
 import com.blueray.rowsandcolumns.side_effect.LaunchedEffectDemo
+import com.blueray.rowsandcolumns.side_effect.NoEffectSnackbarList
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,25 +34,29 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RowsAndColumnsTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                ) { innerPadding ->
-
-                    var toggle by remember {
-                        mutableStateOf(false)
-                    }
-                    if (!toggle)
-                        DisposableEffectDemo(modifier = Modifier.padding(innerPadding))
-
-                    Button(
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .fillMaxSize()
-                            .wrapContentSize(),
-                        onClick = { toggle = !toggle }
-                    ) { Text("Toggle") }
-                }
+                val dummyItems = remember { List(100) { "Item #$it" } }
+                NoEffectSnackbarList(items = dummyItems)
             }
+//            RowsAndColumnsTheme {
+//                Scaffold(
+//                    modifier = Modifier.fillMaxSize(),
+//                ) { innerPadding ->
+//
+//                    var toggle by remember {
+//                        mutableStateOf(false)
+//                    }
+//                    if (!toggle)
+//                        DisposableEffectDemo(modifier = Modifier.padding(innerPadding))
+//
+//                    Button(
+//                        modifier = Modifier
+//                            .padding(innerPadding)
+//                            .fillMaxSize()
+//                            .wrapContentSize(),
+//                        onClick = { toggle = !toggle }
+//                    ) { Text("Toggle") }
+//                }
+//            }
         }
     }
 }
