@@ -1,31 +1,27 @@
 package com.blueray.rowsandcolumns
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.unit.IntOffset
-import com.blueray.rowsandcolumns.measurements.custom_layout.LazyMindMap
-import com.blueray.rowsandcolumns.measurements.custom_layout.MindMapItem
-import com.blueray.rowsandcolumns.side_effect.DisposableEffectDemo
-import com.blueray.rowsandcolumns.side_effect.LaunchedEffectDemo
-import com.blueray.rowsandcolumns.side_effect.NoEffectSnackbarList
+import com.blueray.rowsandcolumns.ui.LocalSnackbarState
 import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
@@ -33,31 +29,43 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RowsAndColumnsTheme {
-                val dummyItems = remember { List(100) { "Item #$it" } }
-                NoEffectSnackbarList(items = dummyItems)
+            val snackbarHostState = remember { SnackbarHostState() }
+
+            CompositionLocalProvider(LocalSnackbarState provides snackbarHostState) {
+                RowsAndColumnsTheme {
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        snackbarHost = { SnackbarHost(hostState = LocalSnackbarState.current) }
+                    ) { innerPadding ->
+                        Column(
+                            modifier = Modifier
+                                .padding(innerPadding)
+                                .fillMaxSize(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            SnackbarDemoButton()
+                        }
+                    }
+                }
             }
-//            RowsAndColumnsTheme {
-//                Scaffold(
-//                    modifier = Modifier.fillMaxSize(),
-//                ) { innerPadding ->
-//
-//                    var toggle by remember {
-//                        mutableStateOf(false)
-//                    }
-//                    if (!toggle)
-//                        DisposableEffectDemo(modifier = Modifier.padding(innerPadding))
-//
-//                    Button(
-//                        modifier = Modifier
-//                            .padding(innerPadding)
-//                            .fillMaxSize()
-//                            .wrapContentSize(),
-//                        onClick = { toggle = !toggle }
-//                    ) { Text("Toggle") }
-//                }
-//            }
         }
+    }
+}
+
+@Composable
+fun SnackbarDemoButton() {
+    val state = LocalSnackbarState.current
+    val scope = rememberCoroutineScope()
+
+    Button(
+        onClick = {
+            scope.launch {
+                state.showSnackbar("Hello from anywhere!")
+            }
+        }
+    ) {
+        Text("Click me to show Snackbar")
     }
 }
 
