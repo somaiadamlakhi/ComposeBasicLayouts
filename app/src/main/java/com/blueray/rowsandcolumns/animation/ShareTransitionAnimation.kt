@@ -1,5 +1,6 @@
 package com.blueray.rowsandcolumns.animation
 
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionLayout
@@ -30,8 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 import com.blueray.rowsandcolumns.R
+import com.blueray.rowsandcolumns.ui.theme.RowsAndColumnsTheme
 
 @Composable
 fun SharedTransitionAnimation(modifier: Modifier = Modifier) {
